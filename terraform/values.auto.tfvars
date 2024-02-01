@@ -15,7 +15,7 @@ map_ip = true
 #ec2
 
 instance_type = "t2.large"
-key_name = "terraform_ec2"
+key_name = "KEY_PAIR_NAME"
 
 #sns topic subscription email
 email = "EMAIL_ADDRESS"
