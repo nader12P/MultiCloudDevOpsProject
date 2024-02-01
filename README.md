@@ -27,7 +27,7 @@ Deploying a simple spring boot app on an openshift cluster with AWS integration 
 - Configure AWS CLI on your machine with the user's ACCESS_KEY_ID & SECRET_ACCESS_KEY
 
 ## Terraform:
-- Change *key_name* in the *values.auto.tfvars* file to the name of the key pair created in AWS
+- Change *key_name* and *email* in the *values.auto.tfvars* file
 - Comment the *backend "s3"* block in the *main.tf* file for an s3 bucket resource to be created for out state files
 - Run the following commands
 `terraform init`
