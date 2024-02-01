@@ -5,7 +5,7 @@ Deploying a simple spring boot app on an openshift cluster with AWS integration 
 
 **Content:**
 - Terraform
-  - Terraform code and modules to provision necessary resources for the CI/CD and testing environment on AWS
+  - Terraform code and modules to provision necessary resources for the CI/CD and testing environment on AWS and integrating CloudWatch to monitor the ec2 instance CPU utilization
 - Ansible and intergrating CloudWatch to monitor the ec2 instance CPU utilization
   - Ansible roles for installing docker, jenkins, sonarqube and copying necessary files for deployment
 - Dockerfile for image build
