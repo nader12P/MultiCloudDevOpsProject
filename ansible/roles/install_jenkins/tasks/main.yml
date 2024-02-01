@@ -1,0 +1,60 @@
+---
+- name: Create a temporary directory
+  ansible.builtin.file:
+    path: "/tmp/oc_binaries"
+    state: directory
+
+- name: Download the file from the URL
+  ansible.builtin.get_url:
+    url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.10.1/openshift-client-linux.tar.gz"
+    dest: "/tmp/oc_binaries/"
+
+- name: Unzip the downloaded file
+  ansible.builtin.unarchive:
+    src: "/tmp/oc_binaries/openshift-client-linux.tar.gz"
+    dest: "/tmp/oc_binaries/"
+    remote_src: yes
+
+- name: Copy files to the destination on the managed host
+  ansible.builtin.copy:
+    src: "/tmp/oc_binaries/oc"
+    dest: "/usr/local/bin/"
+    remote_src: yes
+
+- name: Remove temporary directory
+  ansible.builtin.file:
+    path: "/tmp/oc_binaries"
+    state: absent
+
+- name: Run Jenkins Docker Container
+  docker_container:
+    name: jenkins
+    image: jenkins/jenkins
+    detach: yes
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - "~/jenkins:/var/jenkins_home"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/usr/bin/docker:/usr/bin/docker"
+      - "/home/ec2-user/oc:/usr/local/bin/oc"
+    user: "0"
+
+- name: Wait for the file to be created
+  shell: sleep 30
+
+- name: Debug Jenkins Admin Password
+  shell: docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+  register: jenkins_admin_password
+
+- name: Display Jenkins Container ID
+  debug:
+    var: jenkins_container.Id
+
+- name: Display Jenkins Admin Password
+  debug:
+    var: jenkins_admin_password.stdout
+
+
+

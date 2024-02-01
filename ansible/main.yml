@@ -1,0 +1,8 @@
+---
+- name: Create File Playbook
+  hosts: all
+  become: yes
+  roles:
+    - install_docker
+    - install_jenkins
+    - install_sonarQube
