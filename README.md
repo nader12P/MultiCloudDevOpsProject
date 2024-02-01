@@ -3,6 +3,8 @@
 
 Deploying a simple spring boot app on an openshift cluster with AWS integration for hosting jenkins CI/CD and sonarqube for code quality testing.
 
+![Architecture Diagram](https://github.com/nader12P/MultiCloudDevOpsProject/blob/main/Architecture_Diagram.png)
+
 **Content:**
 - Terraform
   - Terraform code and modules to provision necessary resources for the CI/CD and testing environment on AWS and integrating CloudWatch to monitor the ec2 instance CPU utilization
@@ -128,7 +130,6 @@ Deploying a simple spring boot app on an openshift cluster with AWS integration 
 	- vars > createApp.groovy
 		- OPENSHIFT_CREDENTIAL_ID
 - Select the created pipeline and press *Build Now*
-
 
 
 
