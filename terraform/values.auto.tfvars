@@ -18,5 +18,5 @@ instance_type = "t2.large"
 key_name = "terraform_ec2"
 
 #sns topic subscription email
-email = "nader.mohamedh@gmail.com"
+email = "EMAIL_ADDRESS"
 
