@@ -1,0 +1,17 @@
+---
+- name: Copy compose file from local machine to managed host
+  copy:
+    src: ../files/sonarqube_compose.yml
+    dest: /home/ec2-user/
+
+- name: Executing necessary commands for ElasticSearch
+  command: "{{ item }}"
+  loop:
+    - sysctl -w vm.max_map_count=524288
+    - sysctl -w fs.file-max=131072
+    - ulimit -n 131072
+    - ulimit -u 8192
+ 
+
+- name: Run Docker Compose
+  command: "docker compose -f /home/ec2-user/sonarqube_compose.yml up -d"

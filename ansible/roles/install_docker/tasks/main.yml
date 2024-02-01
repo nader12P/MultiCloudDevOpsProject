@@ -1,0 +1,45 @@
+---
+- name: Uninstalling older versions and dependencies.
+  yum:
+    name:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-engine
+    state: absent
+
+- name: instal yum-utils
+  yum:
+    name: yum-utils
+    state: present
+
+
+- name: Add Docker repository
+  command: "sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+
+
+- name: Install dependencies
+  yum:
+    name:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+    state: present
+
+- name: Start docker service
+  service:
+    name: docker
+    state: started
+
+- name: Enable docker service
+  service:
+    name: docker
+    enabled: true
+
+
